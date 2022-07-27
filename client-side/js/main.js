@@ -98,6 +98,7 @@ function handleLogin(msg) {
     localStorage.setItem("username", msg.username);
     // redirect from login to remote page
     if (listDevice.length === 0) {
+      localStorage.clear();
       alert("There are no connected device.");
     } else {
       if (isLoginPage()) {
@@ -189,7 +190,9 @@ function redirect(deviceName) {
  */
 function initOptionList(deviceList, screenName) {
   var selector = document.getElementById("ESPDeviceSelector");
-  selector.innerHTML = "";
+  if (selector !== null) {
+    selector.innerHTML = "";
+  }
   for (const deviceName of deviceList) {
     var option = document.createElement("option");
     option.value = deviceName;
@@ -266,7 +269,9 @@ function initURLGeneratorDialog() {
   }
   // init parent
   var parent = document.getElementById("modalDeviceList");
-  parent.innerHTML = "";
+  if (parent != null) {
+    parent.innerHTML = "";
+  }
   // create checkbox list
   for (var i = 0; i < listItem.length; i++) {
     addCheckboxItem(listItem[i]);
